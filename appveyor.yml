@@ -11,11 +11,18 @@ before_build:
 
 build_script:
   - C:\msys64\usr\bin\bash.exe --login -c "cd wslbridge2 && pwd && make RELEASE=1"
-  - C:\msys64\usr\bin\bash.exe --login -c "ls -l wslbridge2/bin"
+  - C:\msys64\usr\bin\bash.exe --login -c "ls -l wslbridge2/bin/*.exe"
+  - copy C:\msys64\home\appveyor\wslbridge2\bin\*.exe .
 
 after_build:
   - cd
+  - dir *.exe
+  - sha256sum wslbridge2.exe > wslbridge2.exe.sha256
+  - sha256sum rawpty.exe > rawpty.exe.sha256
 
 artifacts:
   - path: wslbridge2.exe
+  - path: wslbridge2.exe.sha256
+  - path: rawpty.exe
+  - path: rawpty.exe.sha256
 
