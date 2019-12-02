@@ -16,7 +16,9 @@ build_script:
   - C:\msys64\usr\bin\bash.exe --login -c "cd wslbridge2 && pwd && make RELEASE=1"
   - C:\msys64\usr\bin\bash.exe --login -c "ls -l wslbridge2/bin/*.exe"
   - copy C:\msys64\home\appveyor\wslbridge2\bin\*.exe .
-  - wsl -- "cd wslbridge2 && pwd && make RELEASE=1"
+  - cd wslbridge2
+  - wsl -- make RELEASE=1
+  - cd ..
   - wsl -- ls -l wslbridge2/bin/
 
 after_build:
