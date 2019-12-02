@@ -1,0 +1,21 @@
+version: v0.5-{build}
+
+image: Visual Studio 2019
+
+init:
+  - set WB2TAG=v0.5
+  - wsl lsb_release -a
+
+before_build:
+  - C:\msys64\usr\bin\bash.exe --login -c "git clone https://github.com/Biswa96/wslbridge2.git -b %WB2TAG% --depth 1"
+
+build_script:
+  - C:\msys64\usr\bin\bash.exe --login -c "cd wslbridge2 && pwd && make RELEASE=1"
+  - C:\msys64\usr\bin\bash.exe --login -c "ls -l wslbridge2/bin"
+
+after_build:
+  - cd
+
+artifacts:
+  - path: wslbridge2.exe
+
