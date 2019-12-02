@@ -4,6 +4,8 @@ image: Visual Studio 2019
 
 init:
   - set WB2TAG=v0.5
+  - start /B /WAIT C:\msys64\usr\bin\bash.exe --login -c "pacman -Syuu --noconfirm"
+  - C:\msys64\usr\bin\bash.exe --login -c "pacman -Syuu --noconfirm"
   - wsl -- lsb_release -a
   - wsl -- sudo apt-get update -qq
   - wsl -- sudo apt-get install -qy build-essential
@@ -20,16 +22,20 @@ build_script:
   - wsl -- make RELEASE=1
   - cd ..
   - wsl -- ls -l wslbridge2/bin/
+  - copy wslbridge2\bin\wslbridge2-backend .
 
 after_build:
   - cd
   - dir *.exe
   - sha256sum wslbridge2.exe > wslbridge2.exe.sha256
   - sha256sum rawpty.exe > rawpty.exe.sha256
+  - sha256sum wslbridge2-backend > wslbridge2-backend.sha256
 
 artifacts:
   - path: wslbridge2.exe
   - path: wslbridge2.exe.sha256
   - path: rawpty.exe
   - path: rawpty.exe.sha256
+  - path: wslbridge2-backend
+  - path: wslbridge2-backend.sha256
 
