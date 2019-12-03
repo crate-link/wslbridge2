@@ -39,3 +39,16 @@ artifacts:
   - path: wslbridge2-backend
   - path: wslbridge2-backend.sha256
 
+deploy:
+  tag: v0.5
+  release: wslbridge2
+  description: 'Windows terminal emulators bridge for WSL1 and WSL2'
+  provider: GitHub
+  auth_token:
+    secure: M8UHMmf7TSJxv+Q94NpkLaF4p6k4TUWoRd52Md9HQ4zvpEg3Yo+NZrgZFp4cMKNl
+  artifact: /wslbridge2\.exe|wslbridge2\.exe\.sha256|rawpty\.exe|rawpty\.exe\.sha256|wslbridge2-backend|wslbridge2-backend\.sha256/
+  draft: false
+  prerelease: false
+  on:
+    APPVEYOR_REPO_TAG: true
+
