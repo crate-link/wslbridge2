@@ -30,6 +30,11 @@ after_build:
   - sha256sum wslbridge2.exe > wslbridge2.exe.sha256
   - sha256sum rawpty.exe > rawpty.exe.sha256
   - sha256sum wslbridge2-backend > wslbridge2-backend.sha256
+  - cat wslbridge2-backend.sha256
+  - rm wslbridge2-backend*
+  - cp backend/* .
+  - cat wslbridge2-backend.sha256
+  - sha256sum -c wslbridge2-backend.sha256
 
 artifacts:
   - path: wslbridge2.exe
